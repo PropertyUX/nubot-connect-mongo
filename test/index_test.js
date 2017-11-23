@@ -98,4 +98,10 @@ describe('MongoDB Brain', () => {
     //   robot.brain.get('doors').should.eql(testPrivateData.doors)
     // })
   })
+  describe('Robot shutdown', () => {
+    it('closes DB connection', (done) => {
+      robot.brain.on('close', () => done())
+      robot.brain.emit('close')
+    })
+  })
 })

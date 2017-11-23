@@ -1,6 +1,4 @@
 --require dotenv/config
 --require mocha-clean
 --recursive
---sort
---timeout 1500
 --reporter spec

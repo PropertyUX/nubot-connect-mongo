@@ -29,6 +29,9 @@
     ]
   },
   "nyc": {
+    "include": [
+      "lib/**/*.js"
+    ],
     "reporter": [
       "lcovonly",
       "text"
@@ -55,8 +58,11 @@
     "standard": "^10.0.3"
   },
   "scripts": {
-    "test": "grunt test",
-    "watch": "grunt"
+    "pretest": "standard",
+    "test": "nyc mocha --exit",
+    "commit": "git add -A && git status -s && git-cz",
+    "coveralls": "cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "version": "0.0.0"
 }
