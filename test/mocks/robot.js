@@ -17,6 +17,9 @@ class MockBrain extends EventEmitter {
   save () {
     this.emit('save', this.data)
   }
+  get (key) {
+    return this.data._private[key] != null ? this.data._private[key] : null
+  }
 }
 
 class MockRobot {
