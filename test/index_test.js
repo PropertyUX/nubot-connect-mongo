@@ -23,22 +23,27 @@ describe('MongoDB Brain', () => {
   beforeEach(() => {
     robot = new MockRobot()
     testPrivateData = {
-      doors: [ { 'door 1': 'dead end' }, { 'door 2': 'win a prize' } ],
-      favorites: [ { username: 'tim' }, { username: 'jento' } ]
+      doors: [{ 'door 1': 'dead end' }, { 'door 2': 'win a prize' }],
+      favorites: [{ username: 'tim' }, { username: 'jento' }]
     }
-    testCollectionData = [{
-      key: 'doors',
-      type: '_private',
-      value: testPrivateData.doors
-    }, {
-      key: 'favorites',
-      type: '_private',
-      value: testPrivateData.favorites
-    }]
+    testCollectionData = [
+      {
+        key: 'doors',
+        type: '_private',
+        value: testPrivateData.doors
+      }, {
+        key: 'favorites',
+        type: '_private',
+        value: testPrivateData.favorites
+      }
+    ]
   })
   afterEach(() => {
     // close any created connections
-    try { connection.close() } catch (e) {}
+    try {
+      connection.close()
+    } catch (e) {
+    }
   })
   describe('Require', () => {
     it('returns a Mongoose connection', async () => {
@@ -48,7 +53,9 @@ describe('MongoDB Brain', () => {
     it('resolves when connected', (done) => {
       mongoBrain(robot)
         .then(() => done())
-        .catch((err) => { throw err })
+        .catch((err) => {
+          throw err
+        })
     })
   })
   describe('Save private data', () => {
@@ -60,20 +67,20 @@ describe('MongoDB Brain', () => {
       model.collection.drop().catch(() => null)
     })
     it('brain.save() stores in MongoDB', async () => {
-      robot.brain.data._private = Object.assign({}, testPrivateData)
+      robot.brain.data._private = Object.assign({ }, testPrivateData)
       robot.brain.save()
       await delay(100)
-      let results = await model.find({}).lean().exec()
+      let results = await model.find({ }).lean().exec()
       deepClone(results).should.containSubset(testCollectionData)
     })
     it('brain.save() only updates modified', async () => {
-      robot.brain.data._private = Object.assign({}, testPrivateData)
+      robot.brain.data._private = Object.assign({ }, testPrivateData)
       robot.brain.save()
       await delay(100)
       robot.brain.data._private.doors.push({ 'door 3': 'you fall down' })
       robot.brain.save()
       await delay(100)
-      let results = await model.find({}).lean().exec()
+      let results = await model.find({ }).lean().exec()
       let difference = results[0].updatedAt - results[1].updatedAt
       difference.should.be.gt(100)
     })
@@ -102,6 +109,22 @@ describe('MongoDB Brain', () => {
     it('closes DB connection', (done) => {
       robot.brain.on('close', () => done())
       robot.brain.emit('close')
+    })
+  })
+  describe('Sets Brain data', () => {
+    afterEach(() => {
+      model.collection.drop().catch(() => null)
+    })
+    it('should set data', async () => {
+      await mongoBrain(robot)
+      let testKey = 'aKey'
+      let testValue = 'aValue'
+      robot.brain.set(testKey, testValue)
+      robot.brain.save()
+      await delay(100)
+      let search = { key: testKey }
+      let results = await model.findOne(search).lean().exec()
+      deepClone(results).should.containSubset({ 'value': testValue })
     })
   })
 })
