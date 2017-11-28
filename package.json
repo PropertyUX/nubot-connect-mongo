@@ -12,12 +12,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/propertyux/hubot-connect-mongo.git"
+    "url": "https://github.com/propertyux/nubot-connect-mongo.git"
   },
   "bugs": {
-    "url": "https://github.com/propertyux/hubot-connect-mongo/issues"
+    "url": "https://github.com/propertyux/nubot-connect-mongo/issues"
   },
-  "homepage": "https://github.com/propertyux/hubot-connect-mongo",
+  "homepage": "https://github.com/propertyux/nubot-connect-mongo",
   "main": "lib/index.js",
   "engines": {
     "node": "> 8.0.0",

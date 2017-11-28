@@ -1,4 +1,4 @@
-# nubot-mongodb-brain
+# nubot-connect-mongo
 
 [hubot]: http://hubot.github.com
 [standard]: https://standardjs.com/
@@ -11,13 +11,13 @@ with extended features for storing and querying large data sets and models with 
 
 Written in es5 Javascript using [StandardJS][standard]
 
-- https://github.com/propertyux/nubot-mongodb-brain
-- https://npmjs.com/package/nubot-mongodb-brain
+- https://github.com/propertyux/nubot-connect-mongo
+- https://npmjs.com/package/nubot-connect-mongo
 
 Compatible with Nubot 0.4.0+
 
 ## Setup
 
-1. Install `npm install nubot-mongodb-brain -save`
-2. Pass into Nubot as second param 'nubot-mongodb-brain'
+1. Install `npm install nubot-connect-mongo -save`
+2. Pass into Nubot as second param 'nubot-connect-mongo'
 3. Configure `MONGODB_URL` and `BRAIN_COLLECTION` env vars
