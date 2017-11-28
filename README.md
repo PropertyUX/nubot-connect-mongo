@@ -14,10 +14,10 @@ Written in es5 Javascript using [StandardJS][standard]
 - https://github.com/propertyux/nubot-mongodb-brain
 - https://npmjs.com/package/nubot-mongodb-brain
 
+Compatible with Nubot 0.4.0+
+
 ## Setup
 
 1. Install `npm install nubot-mongodb-brain -save`
-2. Edit `external-scripts.json` : `[ "nubot-mongodb-brain" ]`
+2. Pass into Nubot as second param 'nubot-mongodb-brain'
 3. Configure `MONGODB_URL` and `BRAIN_COLLECTION` env vars
-
-## Develop
