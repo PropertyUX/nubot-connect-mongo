@@ -1,0 +1,15 @@
+language: node_js
+notifications:
+  email: false
+node_js:
+  - '8'
+services:
+  - mongodb
+before_script:
+  - sleep 15
+after_success:
+  - npm run coveralls
+  - npm run semantic-release
+branches:
+  except:
+    - /^v\d+\.\d+\.\d+$/
